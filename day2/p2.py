@@ -6,6 +6,7 @@ a = [line.split() for line in a]
 
 safe = 0
 
+
 def checkReport(report):
     for i in range(len(report) - 1):
         if not (1 <= abs(int(report[i]) - int(report[i + 1])) <= 3):
@@ -18,7 +19,6 @@ def checkReport(report):
         return False
 
     return True
-
 
 
 for report in a:

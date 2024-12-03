@@ -8,7 +8,7 @@ safe = 0
 
 for report in a:
     safeBool = True
-    sum = 0 # for checking if all descending or ascending
+    sum = 0  # for checking if all descending or ascending
     for i in range(len(report) - 1):
 
         if not (1 <= abs(int(report[i]) - int(report[i + 1])) <= 3):
@@ -16,14 +16,15 @@ for report in a:
             print("failByIncrement: " + str(report))
             break
 
-        if abs(sum) > abs(sum + int(report[i]) - int(report[i + 1])): # This breaks if sum = 1 and after getting -3 dif, sum is now = 2
+        if abs(sum) > abs(sum + int(report[i]) - int(
+                report[i + 1])):  # This breaks if sum = 1 and after getting -3 dif, sum is now = 2
             safeBool = False
-            print("failByDescendAscend: "+str(report))
+            print("failByDescendAscend: " + str(report))
             break
         sum += sum + int(report[i]) - int(report[i + 1])
 
     if safeBool:
-        print("Success: "+str(report))
+        print("Success: " + str(report))
         safe += 1
 
 print(safe)

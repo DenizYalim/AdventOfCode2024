@@ -13,7 +13,6 @@ for line in a:
     l1.append(col1)
     l2.append(col2)
 
-
 totalSeparation = 0
 for i in range(len(l1)):
     totalSeparation += abs(min(l1) - min(l2))

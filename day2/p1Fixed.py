@@ -15,16 +15,15 @@ for report in a:
             print("failByIncrement: " + str(report))
             break
 
-    descendingBool = all(int(report[i]) < int(report[i+1]) for i in range(len(report) -1))
-    ascendingBool = all(int(report[i]) > int(report[i + 1]) for i in range(len(report)-1))
+    descendingBool = all(int(report[i]) < int(report[i + 1]) for i in range(len(report) - 1))
+    ascendingBool = all(int(report[i]) > int(report[i + 1]) for i in range(len(report) - 1))
 
     if not (ascendingBool or descendingBool):
-        print("failByDescending: "+ str(report))
+        print("failByDescending: " + str(report))
         safeBool = False
 
-
     if safeBool:
-        print("Success: "+str(report))
+        print("Success: " + str(report))
         safe += 1
 
 print(safe)
