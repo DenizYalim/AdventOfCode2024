@@ -14,10 +14,8 @@ def checkXMAS(x, y):
             if 0 <= x + directions[i][j][0] < len(text) and 0 <= y + directions[i][j][1] < len(text[0]): # If index out of bounds doesn't occur
                 word += text[x + directions[i][j][0]][y + directions[i][j][1]] # Add current letter
         if word != "AMS" and word != "ASM": # If word created is invalid
-            print(word)
             valid = False
         else:
-            print("valid, reset")
             word = text[x][y]
 
     return valid
@@ -25,7 +23,6 @@ def checkXMAS(x, y):
 count = 0
 for i in range(len(text)):
     for j in range(len(text[0])):
-        # for direction in directions:
         if checkXMAS(i, j):
             count += 1
 
