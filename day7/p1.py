@@ -8,9 +8,15 @@ with open("input", "r") as file:
     numbers = [[int(i) for i in sublist] for sublist in numbers]
 
 
-def checkSideToSide(answer, numbers, operators):  # [12,24,24] [*,+]
-    temp_answer, temp_numbers, temp_op = answer, numbers.copy(), operators.copy()
-    i = 0 # Left to Right
+def checkSideToSide(answer, numbers, operators, leftToRight=False):  # [12,24,24] [*,+]
+    numbers = numbers.copy()  # Create a local copy of numbers
+    operators = operators.copy()  # Create a local copy of operators
+
+    if leftToRight:
+        i = 0  # Left to Right
+    else:
+        i = len(operators) - 1
+
     while len(numbers) != 1:
         if operators[i] == '*':
             numbers[i + 1] = numbers[i] * numbers[i + 1]
@@ -19,33 +25,41 @@ def checkSideToSide(answer, numbers, operators):  # [12,24,24] [*,+]
         numbers.pop(i)
         operators.pop(i)
 
-    # print(numbers[0])
+        if i != 0:  # If not leftToRight
+            i -= 1
+
     if answer == numbers[0]:
-        return True
-
-    i = len(temp_op) - 1 # Left to Right
-    while len(temp_numbers) != 1:
-        print(str(len(temp_numbers)) + "   " + str(i))
-        print(temp_op)
-        if temp_op[i] == '*':
-            temp_numbers[i + 1] = temp_numbers[i] * temp_numbers[i + 1]
-        else:
-            temp_numbers[i + 1] = temp_numbers[i] + temp_numbers[i + 1]
-        temp_numbers.pop(i)
-        temp_op.pop(i)
-        i-= 1
-
-    print(temp_numbers)
-    if answer == temp_numbers[0]:
         return True
     return False
 
 
-for i, answer in enumerate(answers):
-    pass
+def generate_permutations(operators, current, n):
+    if len(current) == n:
+        return [''.join(current)]  # Return completed permutation
 
-ans = 292
-# num =[11, 6, 16, 20] # Left to Right
-num = [20, 16, 6, 11] # Right to Left
-op = ['+', '*', '+']
-print(checkSideToSide(ans, num, op))
+    permutations = []
+    for op in operators:
+        current.append(op)
+        permutations += generate_permutations(operators, current, n)
+        current.pop()
+
+    return permutations
+
+
+sum = 0
+for i, answer in enumerate(answers):
+    operators = ['+', '*']
+    checksOut = False
+    permutations = generate_permutations(operators, [], len(numbers[i]) - 1)
+    for perm in permutations:
+        if checkSideToSide(answer, numbers[i], list(perm), True):
+            checksOut = True
+            break
+        if checkSideToSide(answer, numbers[i], list(perm), False):
+            checksOut = True
+            break
+    if checksOut:
+        sum += answer
+        print(answer)
+
+print(sum)  # The right answer for my input was: 1260333054159, which is just diabolically huge
