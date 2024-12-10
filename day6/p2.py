@@ -7,6 +7,7 @@ for row, line in enumerate(map):
     if '^' in line:
         guard_pos = [row, line.index('^')]
 
+
 def get_guard_direction(guard_rotation):
     guard_rotation = guard_rotation % 360
     match guard_rotation:
@@ -19,8 +20,6 @@ def get_guard_direction(guard_rotation):
         case 270:
             return [0, -1]
     return 0
-
-
 
 
 def checkForLoop(temp_map, guard_pos):
@@ -46,6 +45,8 @@ def checkForLoop(temp_map, guard_pos):
         else:
             return False
     return False
+
+
 counter = 0
 
 """
@@ -62,10 +63,6 @@ for i in range(len(map)):
     for j in range(len(map[0])):
         temp_map = [row[:] for row in map]
         temp_map[i][j] = '#'
-        # print("i: " +str(i)+", j: "+str(j) +" "+str(temp_map))
-        # print("i: " +str(i)+", j: "+str(j), end= ' ')
         if checkForLoop(temp_map, guard_pos.copy()):
             counter += 1
 print(counter)
-
-
