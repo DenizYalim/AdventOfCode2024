@@ -20,8 +20,10 @@ def checkSideToSide(answer, numbers, operators, leftToRight=False):  # [12,24,24
     while len(numbers) != 1:
         if operators[i] == '*':
             numbers[i + 1] = numbers[i] * numbers[i + 1]
-        else:
+        elif operators[i] == '+':
             numbers[i + 1] = numbers[i] + numbers[i + 1]
+        else:  # Concatenation
+            numbers[i + 1] = int(str(numbers[i]) + str(numbers[i + 1]))  # Funny solution, I know
         numbers.pop(i)
         operators.pop(i)
 
@@ -48,7 +50,7 @@ def generate_permutations(operators, current, n):
 
 sum = 0
 for i, answer in enumerate(answers):
-    operators = ['+', '*']
+    operators = ['+', '*', '|']
     checksOut = False
     permutations = generate_permutations(operators, [], len(numbers[i]) - 1)
     for perm in permutations:
@@ -59,6 +61,7 @@ for i, answer in enumerate(answers):
             checksOut = True
             break
     if checksOut:
+        print(str(i) + " of "+ str(len(answers))+":  "+ str(answer))
         sum += answer
 
-print(sum)  # The right answer for my input was: 1260333054159, which is just diabolically huge
+print(sum)  # The right answer for my input was: 162042343638683, which is just diabolically huge
