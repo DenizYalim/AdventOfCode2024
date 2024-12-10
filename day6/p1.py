@@ -23,7 +23,6 @@ def get_guard_direction(guard_rotation):
 
 
 guard_angle = 0
-sum = 0
 dict = {}  # takes (x,y) key value return boolean about visited status
 
 while 0 <= guard_pos[0] < len(map) and 0 <= guard_pos[1] < len(map[0]):
