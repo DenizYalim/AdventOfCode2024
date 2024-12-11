@@ -6,15 +6,6 @@ with open("input", "r") as file:
 dictAntenna = {}  # Takes char, holds vector for all positions
 dictAntiNode = {}  # Takes x,y tuple returns boolean value of an antiNode is there or not
 
-"""
-if 1 in dictAntiNode:
-    dictAntiNode[1] = [dictAntiNode[1], " hi"]
-else:
-    dictAntiNode[1] = "hi"
-dictAntiNode[1] = [dictAntiNode[1], " hey"]
-print(dictAntiNode[1])
-"""
-
 for i, row in enumerate(freq_map):  # Taking note of the positions of every antenna
     for j, val in enumerate(row):
         if val != '.':
@@ -23,7 +14,6 @@ for i, row in enumerate(freq_map):  # Taking note of the positions of every ante
                 dictAntenna[val].append((i, j))
             else:
                 dictAntenna[val] = [(i, j)]
-print(dictAntenna)
 
 
 for key in dictAntenna:
@@ -32,7 +22,6 @@ for key in dictAntenna:
             if tuple1 != tuple2:
                 dis_x = tuple1[0] - tuple2[0]
                 dis_y = tuple1[1] - tuple2[1]
-                # print(str(tuple1) +" " +  str(tuple2) + " =  " + str(tuple((dis_x, dis_y))))
 
                 if 0 <= tuple1[0] - dis_x < len(freq_map) and 0 <= tuple1[1] - dis_y < len(freq_map):
                     if freq_map[tuple1[0] - dis_x][tuple1[1] - dis_y] != key:
@@ -44,5 +33,3 @@ for key in dictAntenna:
 
                 pass
 print(len(dictAntiNode))
-print(dictAntiNode.keys())
-
