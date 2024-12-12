@@ -23,15 +23,9 @@ def after(cur, row, col):
     [after(cur, row + dx, col + dy) for dx, dy in directions]
 
 
-def after0(cur, row, col):
-    nineList = []
-    after(cur, row, col)
-    return len(nineList)
-
-
 for rowR, row in enumerate(topo_map):
     for columnC, val in enumerate(row):
         if val == '0':
-            after0(-1, rowR, columnC)
+            after(-1, rowR, columnC)
 
 print(count)
