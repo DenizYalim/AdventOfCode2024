@@ -54,12 +54,6 @@ count = 0
 for rowR, row in enumerate(topo_map):
     for columnC, val in enumerate(row):
         if val == '0':
-            # print("asd")
-            """
-            if after0(-1, rowR, columnC):
-                count += 1
-                """
-            """"""
             count += after0(-1, rowR, columnC)
 
 print(count)
