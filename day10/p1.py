@@ -5,7 +5,6 @@ with open('input', 'r') as file:
 directions = [(1, 0), (0, 1), (-1, 0), (0, -1)]
 
 
-
 def after(cur, row, col, nineList):
     # print(f"cur: {cur}, row: {row}, col: {col}")
     if 0 <= row < len(topo_map) and 0 <= col < len(topo_map[0]):
@@ -20,7 +19,7 @@ def after(cur, row, col, nineList):
         if (row, col) not in nineList:
             nineList.append((row, col))
 
-    [after(cur, row+ dx, col+ dy, nineList) for dx,dy in directions]
+    [after(cur, row + dx, col + dy, nineList) for dx, dy in directions]
 
 
 def after0(cur, row, col):

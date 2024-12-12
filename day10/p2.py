@@ -4,8 +4,9 @@ with open('input', 'r') as file:
 
 directions = [(1, 0), (0, 1), (-1, 0), (0, -1)]
 
-
 count = 0
+
+
 def after(cur, row, col):
     global count
     if 0 <= row < len(topo_map) and 0 <= col < len(topo_map[0]):
@@ -19,7 +20,7 @@ def after(cur, row, col):
     if cur == 9:
         count += 1
 
-    [after(cur, row+ dx, col+ dy) for dx,dy in directions]
+    [after(cur, row + dx, col + dy) for dx, dy in directions]
 
 
 def after0(cur, row, col):
@@ -28,11 +29,9 @@ def after0(cur, row, col):
     return len(nineList)
 
 
-
 for rowR, row in enumerate(topo_map):
     for columnC, val in enumerate(row):
         if val == '0':
-            # print("asd")
             after0(-1, rowR, columnC)
 
 print(count)
