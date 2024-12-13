@@ -8,9 +8,23 @@ def getDigit(number):
 
 
 def stoneAfterBlink(stone): # Should take 1 stone return a list of the output for 1 blink
+    if stone == 0:
+        return [1]
 
+    if getDigit(stone)%2 == 0:
+        half = 10 ** (getDigit(stone) / 2)
+        left = stone // half
+        right = stone - left * half
+        return [int(left), int(right)]
+    return [stone*2024]
 
 def countForStoneAfterBlinks(stone, stepSize): # Should take 1 stone, should return len(list) after n steps
+    count = 0
+    outpt = []
+    outpt.append(stone)
+    for step in range(stepSize):
+        tempList = []
+            for
 
 
 
