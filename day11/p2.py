@@ -6,42 +6,19 @@ with open("input", "r") as file:
 def getDigit(number):
     return len(str(number))
 
-dictForStone = {}
-def returnStone(index, array):
-    if array[index] in dictForStone:
-        return dictForStone[array[index]]
 
-    if array[index] == 0:
-        array[index] = 1
-        return False
+def stoneAfterBlink(stone): # Should take 1 stone return a list of the output for 1 blink
 
-    if getDigit(array[index])%2 == 0:
-        half = 10**(getDigit(array[index])/2)
-        left = array[index]//half
-        right = array[index] - left*half
-        array[index] = int(left)
-        array.insert(index+1, int(right))
-        return True
 
-    array[index] = array[index]*2024
-    return False
+def countForStoneAfterBlinks(stone, stepSize): # Should take 1 stone, should return len(list) after n steps
 
-def recur1(array, stepSize):
-    for step in range(stepSize):
-        for _ in range(len(array)):
-            index = 0
-            if returnStone(index, array):  # lol
-                index += 1
-            index += 1
 
-totalCount = 0
-def findStoneCountForStone(stone, stepSize):
-    global totalCount
-    array = []
-    array.append(stone)
-    recur1(array, stepSize)
-    totalCount += len(array)
+
+def findCountForList(stones, stepSize): # Should run recur1 for each stone, sum up the returns
+    count = 0
+    for stone in stones:
+        count += countForStoneAfterBlinks(stone, stepSize)
+    return count
 
 stepSize = 5
-findStoneCountForStone(125, stepSize)
-print(totalCount)
+print(findCountForList(stones, stepSize))
