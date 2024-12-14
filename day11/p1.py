@@ -27,7 +27,7 @@ stepSize = 25
 for step in range(stepSize):
     index = 0
     for _ in range(len(stones)):
-        if returnStone(index): # lol
+        if returnStone(index):  # lol
             index += 1
         index += 1
 print(len(stones))
