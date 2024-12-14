@@ -21,7 +21,7 @@ def stoneAfterBlink(stone):  # Should take 1 stone return a list of the output f
     return False, [stone * 2024]
 
 
-dp = {}  # (number: int, stepsLeft: int) -> numberOfStonesCreatedAfterTurns : int
+dp = {}  # (number, stepsLeft) -> numberOfStonesCreatedAfterTurns
 
 
 def countForStoneAfterBlinks(stone, stepSize):  # Should take 1 stone, should return len(list) after n steps
