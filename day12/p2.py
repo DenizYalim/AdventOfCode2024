@@ -9,24 +9,33 @@ visited = {}  # (row, col) -> boolean
 
 
 def recursive(row, col, letter):  # returns (borderLength, area)
-    borderLength, area = 0, 1
+    cornerCount, area = 0, 1
     if not (0 <= row < len(plot_map) and 0 <= col < len(plot_map[0])):
-        return 1, 0
+        return 0, 0, True
 
     if plot_map[row][col] != letter:
-        return 1, 0
+        return 0, 0, True
 
     if (row, col) in visited:
-        return 0, 0
+        return 0, 0, False
 
     visited[(row, col)] = True
 
-    for dx, dy in directions:
-        a2, b2 = recursive(row + dx, col + dy, plot_map[row][col])
-        borderLength += a2
-        area += b2
+    uC, uA, up = recursive(row - 1, col + 0, plot_map[row][col])  # todo remove uC uA stuff
+    dC, dA, down = recursive(row + 1, col + 0, plot_map[row][col])
+    lC, lA, left = recursive(row - 0, col - 1, plot_map[row][col])
+    rC, rA, right = recursive(row - 0, col + 1, plot_map[row][col])
 
-    return borderLength, area
+    if (up and left) or (up and right):
+        cornerCount += 1
+    if (down and left) or (down and right):
+        cornerCount += 1
+
+
+    cornerCount += uC + dC + lC + rC
+    area += uA + dA + lA + rA
+
+    return cornerCount, area, False
 
 
 cost = 0
@@ -34,7 +43,7 @@ a, b = 0, 0
 for i in range(len(plot_map)):
     for j in range(len(plot_map[0])):
         if not (i, j) in visited:
-            x, d = recursive(i, j, plot_map[i][j])
+            x, d, gereksiz = recursive(i, j, plot_map[i][j])
             a = x
             b = d
             print(f"{i, j}, {plot_map[i][j]} : {b, a}")
