@@ -11,21 +11,19 @@ for i, char in enumerate(longString):
 left = longerString.index('.')
 right = len(longerString) - 1
 
-while(left < right):
+while (left < right):
     # print(f"{left}: left:{longerString[left]}, {right}:right: {longerString[right]}, {str(longerString)}")
     longerString[left], longerString[right] = longerString[right], longerString[left]
-    right-=1
+    right -= 1
 
-    while(longerString[right] == '.'):
-        right-=1
-    while(longerString[left] != '.'):
+    while (longerString[right] == '.'):
+        right -= 1
+    while (longerString[left] != '.'):
         left += 1
 
-goodList = longerString[:longerString.index('.')] # Get rid of dots
+goodList = longerString[:longerString.index('.')]  # Get rid of dots
 
 summ = 0
 for i, char in enumerate(goodList):
-   summ += char*i
+    summ += char * i
 print(summ)
-
-
