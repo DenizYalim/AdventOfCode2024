@@ -3,11 +3,10 @@ import re
 WC_WIDTH = 101
 WC_HEIGHT = 103
 SECONDS = 100
-print(f"1-2={1 % 10}")
 with open("input", "r") as file:
     robot_pos = file.read().split('\n')
     robot_pos = [map(int, re.findall(r"-\d+|\d+", robot)) for robot in robot_pos]
-    robot_pos = [((x + Vx * SECONDS) % WC_WIDTH, (int(y) + int(Vy) * SECONDS) % WC_HEIGHT) for x, y, Vx, Vy in
+    robot_pos = [((x + Vx * SECONDS) % WC_WIDTH, (y + Vy * SECONDS) % WC_HEIGHT) for x, y, Vx, Vy in
                  robot_pos]
     print(robot_pos)
 
