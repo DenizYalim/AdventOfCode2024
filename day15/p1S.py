@@ -55,9 +55,6 @@ def printMap(map):
 
 for step in steps:
     move_robot(directions[step])
-    #printMap(grid)
-    print()
-
 
 
 # Calculating GPS
