@@ -14,16 +14,17 @@ with open("input.txt", "r") as file:
         for j, char in enumerate(line):
             
             if char == '.':
-                grid[i][j] = '..'
+                grid[i].insert(j, '.')
             elif char == '#':
-                grid[i][j] = '##'
+                grid[i].insert(j, '#')
             elif char == 'O':
-                grid[i][j] = '[]'
+                grid[i][j] = '['
+                grid[i].insert(j, ']')
             elif char == '@':
-                grid[i][j] = '@.'
+                grid[i].insert(j+1,'.') 
             # i+=1
-            # j+=1
-    printMap(grid)
+            j+=1
+    # printMap(grid)
 
 directions = {  '<': (0, -1),
                 '>': (0,1),
@@ -32,11 +33,13 @@ directions = {  '<': (0, -1),
 
 # Find where the robot is
 
-for i in range(len(grid)):
-    for j in range(len(grid)):
-        if grid[i][j] == '@':
-            robot_i, robot_j = i,j
-            break
+def get_robot_ij():
+    for i in range(len(grid)):
+        for j in range(len(grid)):
+            print(grid[i][j])
+            if grid[i][j] == '@':
+                print("ASDSADSAD")
+                return [i,j]
 
 def in_grid(i,j):
     return (i>= 0 and j>= 0) and (i < len(grid) and j < len(grid))
@@ -69,11 +72,27 @@ def move_in_j(i,j, dir):
     return True
     
 def move_in_i(i, j, dir):
-    pass
+    if grid[i][j] == '#':
+        return False
+    
+    if grid[i][j] == '.':
+        grid[i][j] = grid[i -dir[0]][j -dir[1]]
+        return True
+    
+    ok_mi = move_in_i(i+ dir[0], j + dir[1], dir)
+
+    if ok_mi:
+        if grid[i][j] == '@':
+            grid[i][j] = '.'
+        else:
+            grid[i][j] = grid[i -dir[0]][j -dir[1]]
+    return ok_mi
+         
 
 def move(step):
-    global robot_i, robot_j, grid
-    ri, rj = robot_i, robot_j
+    # global robot_i, robot_j, grid
+    a = get_robot_ij()
+    ri, rj = a[0], a[1]
     if step == '<' or step == '>':
         b = move_in_i(ri, rj, directions[step])
     else:
