@@ -36,7 +36,7 @@ def dijsktra(i, j, dir, curCost):
 
     for index, (di, dj) in enumerate(directions):
         if dir != index:
-            dijsktra(i + di, j + dj, index, curCost + 1000) # yeah not efficient, we are going over same directions
+            dijsktra(i + di, j + dj, index, curCost + 1001) # yeah not efficient, we are going over same directions
     
 
 
